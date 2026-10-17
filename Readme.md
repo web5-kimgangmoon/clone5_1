@@ -23,3 +23,7 @@ next, framer-motion, embla Carousel, react, tailwind, github, @heroicons/react, 
 ### 10/16
 
 1. 첫 커밋.
+
+### 10/17
+
+1. next 시작.
