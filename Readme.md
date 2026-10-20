@@ -31,3 +31,7 @@ next, framer-motion, embla Carousel, react, tailwind, github, @heroicons/react, 
 ### 10/18
 
 1. 이미지 다운로드.
+
+### 10/18
+
+1. 헤더 시작.
