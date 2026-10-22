@@ -39,3 +39,7 @@ next, framer-motion, embla Carousel, react, tailwind, github, @heroicons/react, 
 ### 10/19
 
 1. 라이브러리 설치.
+
+### 10/20
+
+1. 헤더 작업중

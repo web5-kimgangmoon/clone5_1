@@ -1,3 +1,37 @@
+import Image from "next/image";
+
 export default () => {
-  return <div></div>;
+  return (
+    <header className="w-full bg-orange-50">
+      <div className="flex justify-between h-30 max-w-275 w-full mx-auto">
+        <div className="flex justify-start items-center h-30">
+          <Image
+            height={75}
+            width={75}
+            src={"/logo.png"}
+            alt="logo.png"
+            className="block"
+          ></Image>
+        </div>
+        <div className="flex flex-col">
+          <ul className="flex">
+            <li>Sign In</li>
+            <li>My Starbucks</li>
+            <li>Customer</li>
+            <li>Service & Ideas</li>
+            <li>Find a Store</li>
+          </ul>
+          <ul className="flex">
+            <li>COFFEE</li>
+            <li>MENU</li>
+            <li>STORE</li>
+            <li>ESG</li>
+            <li>STARBUCKS REWARDS</li>
+            <li>CORPORATE SALES</li>
+            <li>WHAT'S NEW</li>
+          </ul>
+        </div>
+      </div>
+    </header>
+  );
 };
