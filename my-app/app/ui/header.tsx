@@ -15,11 +15,19 @@ export default () => {
         </div>
         <div className="flex flex-col">
           <ul className="flex">
-            <li>Sign In</li>
-            <li>My Starbucks</li>
-            <li>Customer</li>
-            <li>Service & Ideas</li>
-            <li>Find a Store</li>
+            {[
+              "Sign In",
+              "My Starbucks",
+              "Customer",
+              "Service & Ideas",
+              "Find a Store",
+            ].map((v, idx) => {
+              return (
+                <li className={"px-2 text-sm"} key={idx}>
+                  {v}
+                </li>
+              );
+            })}
           </ul>
           <ul className="flex">
             <li>COFFEE</li>
