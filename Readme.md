@@ -55,3 +55,7 @@ next, framer-motion, embla Carousel, react, tailwind, github, @heroicons/react, 
 ### 10/23
 
 1. 헤더 작업중
+
+### 10/24
+
+1. 쉬었습니다.
