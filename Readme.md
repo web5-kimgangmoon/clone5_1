@@ -6,7 +6,7 @@
 
 # 스택
 
-next, framer-motion, embla Carousel, react, tailwind, github, @heroicons/react, headless ui, clsx, pretendard
+next, framer-motion, embla Carousel, react, tailwind, github, @heroicons/react, headless ui, clsx, pretendard, heroicons
 
 # 기타
 
@@ -71,3 +71,7 @@ next, framer-motion, embla Carousel, react, tailwind, github, @heroicons/react, 
 ### 10/28
 
 1. 쉬었습니다.
+
+### 10/29
+
+1. 헤더작성중.
