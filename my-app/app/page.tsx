@@ -1,8 +1,13 @@
 "use client";
 
-import Image from "next/image";
 import Header from "./ui/header";
+import Body from "./ui/body";
 
 export default function Home() {
-  return <Header></Header>;
+  return (
+    <>
+      <Header></Header>
+      <Body></Body>
+    </>
+  );
 }

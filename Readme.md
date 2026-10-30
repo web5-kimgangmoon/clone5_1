@@ -75,3 +75,8 @@ next, framer-motion, embla Carousel, react, tailwind, github, @heroicons/react, 
 ### 10/29
 
 1. 헤더작성중.
+
+### 10/30
+
+1. 헤더 포지션 잡기 외 완성.
+2. body Section 1 작업중.
