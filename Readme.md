@@ -80,3 +80,8 @@ next, framer-motion, embla Carousel, react, tailwind, github, @heroicons/react, 
 
 1. 헤더 포지션 잡기 외 완성.
 2. body Section 1 작업중.
+
+### 10/31
+
+1. section 1 => TopSection. TopSection 애니메이션 제외 작업 종료.
+2. notice section 작업중.
