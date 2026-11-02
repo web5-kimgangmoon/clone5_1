@@ -85,3 +85,9 @@ next, framer-motion, embla Carousel, react, tailwind, github, @heroicons/react, 
 
 1. section 1 => TopSection. TopSection 애니메이션 제외 작업 종료.
 2. notice section 작업중.
+
+### 11/2
+
+1. notice section 완성.
+2. top section 애니메이션 넣었습니다.
+3. notice 버튼으로 나오는 슬라이드 구현; header의 position sticky로 변경.

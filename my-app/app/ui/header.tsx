@@ -238,7 +238,7 @@ export default () => {
   const [isClick, setClick] = useState(false);
   const [menuHover, setMenuHover] = useState<number>(-1);
   return (
-    <header className="w-full bg-orange-50 relative z-10">
+    <header className="sticky top-0 left-0 w-full bg-orange-50 z-10">
       <div className="flex justify-between h-30 max-w-275 w-full mx-auto pt-2">
         <div className="flex justify-start items-center h-30">
           <Image
