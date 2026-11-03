@@ -241,13 +241,15 @@ export default () => {
     <header className="sticky top-0 left-0 w-full bg-orange-50 z-10">
       <div className="flex justify-between h-30 max-w-275 w-full mx-auto pt-2">
         <div className="flex justify-start items-center h-30">
-          <Image
-            height={75}
-            width={75}
-            src={"/logo.png"}
-            alt="logo.png"
-            className="block"
-          ></Image>
+          <Link href={"/"}>
+            <Image
+              height={75}
+              width={75}
+              src={"/logo.png"}
+              alt="logo.png"
+              className="block"
+            ></Image>
+          </Link>
         </div>
         <div className="flex flex-col gap-4">
           <ul className="flex justify-end [&>:nth-child(5)]:after:content-none">

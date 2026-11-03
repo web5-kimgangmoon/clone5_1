@@ -9,37 +9,19 @@ import Autoplay from "embla-carousel-autoplay";
 import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { motion } from "motion/react";
+import { useEffect, useRef, useState } from "react";
+import { motion, useMotionValueEvent, useScroll } from "motion/react";
 
 export default () => {
   return (
     <>
       <TopSection />
       <NoticeSection />
-      <section className="bg-emerald-950/90">
-        <div className="mx-auto max-w-250 flex py-8 text-white">
-          <Image
-            src={"/rewards-logo.png"}
-            alt="rewards-logo.png"
-            width={180}
-            height={180}
-          ></Image>
-          <div>
-            <h2 className="text-[1.75rem]">
-              스타벅스만의 특별한 혜택, <strong>스타벅스 리워드</strong>
-            </h2>
-            <p>
-              스타벅스 회원이세요? 로그인을 통해 나만의 리워드를 확인해보세요.
-              스타벅스 회원이 아니세요? 가입을 통해 리워드 혜택을 즐기세요.
-            </p>
-            <p>
-              회원 가입 후, 스타벅스 모바일 카드를 "나에게 선물하기"로
-              구매하시고, 편리하게 등록하세요! 카드를 등록하여 스타벅스 리워드
-              회원이 되신 후, 첫 구매를 하시면 무료 음료쿠폰을 드립니다!
-            </p>
-          </div>
-        </div>
+      <EventSection />
+      <ChristmasBlendSection />
+      <ChristmasBoxSection />
+      <section className="sticky z-[-1] bottom-0 left-0 bg-[url(/2026_christmasPh1_pick_bg_261015.jpg)] h-[800px]">
+        <div className=""></div>
       </section>
     </>
   );
@@ -245,7 +227,7 @@ const NoticeSection = () => {
                 ].map((v, idx) => (
                   <li
                     className={clsx(
-                      "relative grow-0 shrink-0 basis-[50%] min-w-0 mr-4",
+                      "relative grow-0 shrink-0 basis-[40%] min-w-0 mr-4",
                       activeNum === idx ? "opacity-100" : "opacity-60",
                     )}
                     key={idx}
@@ -308,6 +290,186 @@ const NoticeSection = () => {
             ></button>
           </div>
         </motion.div>
+      </div>
+    </section>
+  );
+};
+
+const EventSection = () => {
+  return (
+    <section className="bg-emerald-950">
+      <div className="flex gap-8 mx-auto max-w-250 py-8 text-white">
+        <Link href={"/"}>
+          <Image
+            src={"/rewards-logo.png"}
+            alt="rewards-logo.png"
+            width={180}
+            height={180}
+          ></Image>
+        </Link>
+        <div className="grow-1">
+          <div className="flex justify-between items-end border-b border-gray-500 pb-2">
+            <div>
+              <h2 className="text-[1.75rem] pb-2">
+                스타벅스만의 특별한 혜택, <strong>스타벅스 리워드</strong>
+              </h2>
+              <p className="text-lg">
+                <strong>스타벅스 회원이세요?</strong> 로그인을 통해 나만의
+                리워드를 확인해보세요.
+                <br />
+                <strong>스타벅스 회원이 아니세요?</strong> 가입을 통해 리워드
+                혜택을 즐기세요.
+              </p>
+            </div>
+            <div className="pb-4 flex">
+              <Link
+                className="px-5 py-2 bg-emerald-800 rounded-sm hover:underline mr-3 text-sm"
+                href={"/"}
+              >
+                회원가입
+              </Link>
+              <Link
+                className="flex items-center px-5 py-1 border-2 border-white rounded-sm hover:underline text-sm"
+                href={"/"}
+              >
+                로그인
+              </Link>
+            </div>
+          </div>
+          <div className="flex justify-between items-end">
+            <div>
+              <p className="pt-3">
+                회원 가입 후, 스타벅스 모바일 카드를
+                <strong>
+                  "나에게 선물하기"로 구매하시고, 편리하게 등록하세요!
+                </strong>
+                <br />
+                카드를 등록하여 스타벅스 리워드 회원이 되신 후, 첫 구매를 하시면
+                무료 음료쿠폰을 드립니다!
+              </p>
+            </div>
+            <div>
+              <Link
+                href={"/"}
+                className="text-sm hover:underline border border-white border-2 rounded-sm px-1 py-2"
+              >
+                스타벅스 모바일 카드 선물하기
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const ChristmasBlendSection = () => {
+  const scroll = useScroll();
+  const target = useRef<HTMLDivElement>(null);
+
+  const [isTargetAnimate, setIsTargetAnimate] = useState(false);
+  useMotionValueEvent(scroll.scrollY, "change", (v) => {
+    setIsTargetAnimate(
+      v + window.innerHeight >= (target.current?.offsetTop ?? 0),
+    );
+  });
+  return (
+    <section
+      className="bg-[url(/2026_christmasPh1_promotion_bg_261015.jpg)] bg-cover bg-no-repeat bg-center py-4 h-140 overflow-hidden"
+      ref={target}
+    >
+      <div className="flex w-full mx-auto max-w-220">
+        <div className="w-full">
+          <div className="relative h-full max-h-[497px] aspect-396/497 grow-0 shrink-0">
+            <motion.div
+              className="absolute top-1/7 w-full h-full"
+              initial={{ opacity: 0, left: "-100vw" }}
+              animate={
+                isTargetAnimate
+                  ? { opacity: 1, left: "3rem" }
+                  : { opacity: 0, left: "-100vw" }
+              }
+              transition={{
+                duration: isTargetAnimate ? 1.5 : 5,
+                ease: "easeOut",
+              }}
+            >
+              <Image
+                src={"/2026_christmasPh1_promotion_beans_261015.png"}
+                alt="2026_christmasPh1_promotion_beans_261015.png"
+                fill
+              ></Image>
+            </motion.div>
+          </div>
+        </div>
+        <div className="mt-25 mb-30 w-full relative">
+          <motion.div
+            className="absolute w-full h-full"
+            initial={{ opacity: 0, left: "100vw" }}
+            animate={
+              isTargetAnimate
+                ? { opacity: 1, left: "-6rem" }
+                : { opacity: 0, left: "100vw" }
+            }
+            transition={{
+              duration: isTargetAnimate ? 1.7 : 5,
+              ease: "easeOut",
+            }}
+          >
+            <div className="relative h-full max-h-[206px] aspect-543/206">
+              <Image
+                src={"/2026_christmasPh1_promotion_txt_261015.png"}
+                alt="2026_christmasPh1_promotion_txt_261015.png"
+                fill
+              ></Image>
+            </div>
+            <button
+              className={clsx(
+                "hover:underline border-2 border-white rounded-md px-5 py-1 text-white cursor-pointer hover:bg-white hover:text-red-600 transition-colors duration-500 ease-in-out text-sm",
+                "mt-10",
+              )}
+            >
+              자세히 보기
+            </button>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const ChristmasBoxSection = () => {
+  return (
+    <section className="bg-[url(/261021_pc_reserve_bg.jpg)] overflow-hidden">
+      <div className="flex relative mx-auto w-full max-w-270 h-100">
+        <div className="absolute top-0 left-0 mt-20 ml-10 w-full max-w-[539px] z-1">
+          <div className="relative w-full aspect-539/160">
+            <Image
+              src={"/261021_pc_reserve_title.png"}
+              alt="261021_pc_reserve_title"
+              fill
+            ></Image>
+          </div>
+          <div className="w-max mx-auto pt-15">
+            <button
+              className={clsx(
+                "hover:underline border-2 border-yellow-500 rounded-md px-6 py-[0.35rem] text-yellow-500 w-max cursor-pointer hover:bg-yellow-500 hover:text-white transition-colors duration-500 ease-in-out",
+                "ml-[68%]",
+              )}
+            >
+              자세히 보기
+            </button>
+          </div>
+        </div>
+        <div className="absolute top-0 right-0 w-full h-full">
+          <div className="absolute top-0 right-[-450px] w-[2000px] aspect-[5]">
+            <Image
+              src={"/261021_pc_reserve_coffee.png"}
+              alt="261021_pc_reserve_coffee.png"
+              fill
+            ></Image>
+          </div>
+        </div>
       </div>
     </section>
   );
