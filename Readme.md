@@ -97,3 +97,7 @@ next, framer-motion, embla Carousel, react, tailwind, github, @heroicons/react, 
 1. Event section 완성.
 2. ChristmasBlendSection 완성.
 3. ChristmasBoxSection 완성.
+
+### 11/4
+
+1. 새 Section 작업중.

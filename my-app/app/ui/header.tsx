@@ -312,7 +312,7 @@ export default () => {
                 </Link>
                 {menuHover == idx && (
                   <motion.div
-                    className="absolute left-0 top-[100%] w-screen bg-zinc-800 overflow-hidden"
+                    className="absolute left-0 top-[100%] w-full bg-zinc-800 overflow-hidden"
                     initial={{ height: 0 }}
                     animate={{ height: "auto" }}
                     transition={{ ease: "easeOut" }}

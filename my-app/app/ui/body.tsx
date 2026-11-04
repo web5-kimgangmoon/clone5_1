@@ -20,9 +20,59 @@ export default () => {
       <EventSection />
       <ChristmasBlendSection />
       <ChristmasBoxSection />
-      <section className="sticky z-[-1] bottom-0 left-0 bg-[url(/2026_christmasPh1_pick_bg_261015.jpg)] h-[800px]">
-        <div className=""></div>
+      <section
+        className="relative bg-[url(/2026_christmasPh1_pick_bg_261015.jpg)] h-[800px] bg-fixed bg-no-repeat bg-position-[bottom,center]"
+        style={{ backgroundSize: "auto 87%" }} // 스타벅스표 코드. 전체 height=800px, 헤더=120px, 이미지가 87%일 경우 뷰포트(내 노트북 기준 945px)를 기준으로=822.15px을 차지한다. background-size에 따라, 120.85px이 본래 빈 배경이 되어야하지만, 헤더가 120px만큼 가려주고, 0.85px은 렌더링 과정에서 반올림되거나 눈에 띄지 않게 된다.
+        // 이는 해당 고찰 근거. W3C 문서에 기록되어 있다.
+        // If background images are specified, this property specifies whether they are fixed with regard to the viewport (fixed) or scroll along with the box (scroll) or its contents (local). The property’s value is given as a comma-separated list of <attachment> keywords where
+        // <attachment> = scroll | fixed | local
+      >
+        <div className="mx-auto flex items-center justify-end max-w-360 h-full">
+          <div className="flex flex-col justify-center items-end">
+            <div className="relative w-[257px] aspect-257/202">
+              <div className="absolute w-full top-0 left-[4vw]">
+                <Image
+                  src={"/2025_january_pick_txt01.png"}
+                  alt="2025_january_pick_txt01"
+                  width={257}
+                  height={202}
+                ></Image>
+              </div>
+            </div>
+            <div className="relative w-[363px] aspect-363/153 mt-15">
+              <div className="absolute w-full top-0 left-[4vw]">
+                <Image
+                  src={"/2025_january_pick_txt02.png"}
+                  alt="2025_january_pick_txt02"
+                  width={363}
+                  height={153}
+                ></Image>
+              </div>
+            </div>
+            <div className="relative mt-10 h-9 w-35">
+              <button
+                className={clsx(
+                  "hover:underline border-2 border-white rounded-md px-4 py-1 text-white w-35 h-9 cursor-pointer hover:bg-white hover:text-black transition-colors duration-500 ease-in-out",
+                  "absolute top-0 left-[3vw]",
+                )}
+              >
+                자세히 보기
+              </button>
+            </div>
+          </div>
+          <div className="relative w-[953px] aspect-953/615">
+            <div className="absolute top-0 left-[6vw] w-full">
+              <Image
+                src={"/2026_christmasPh1_pick_img_261015.png"}
+                alt="2026_christmasPh1_pick_img_261015.png"
+                width={953}
+                height={615}
+              ></Image>
+            </div>
+          </div>
+        </div>
       </section>
+      <section className="h-1000"></section>
     </>
   );
 };
