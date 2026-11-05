@@ -101,3 +101,8 @@ next, framer-motion, embla Carousel, react, tailwind, github, @heroicons/react, 
 ### 11/4
 
 1. 새 Section 작업중.
+
+### 11/5
+
+1. body 완성.
+2. footer 시작.

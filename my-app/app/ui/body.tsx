@@ -9,8 +9,9 @@ import Autoplay from "embla-carousel-autoplay";
 import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
-import { motion, useMotionValueEvent, useScroll } from "motion/react";
+import { useEffect, useState } from "react";
+import { motion } from "motion/react";
+import { useScrollCheck } from "../library/scrollCheck";
 
 export default () => {
   return (
@@ -20,59 +21,9 @@ export default () => {
       <EventSection />
       <ChristmasBlendSection />
       <ChristmasBoxSection />
-      <section
-        className="relative bg-[url(/2026_christmasPh1_pick_bg_261015.jpg)] h-[800px] bg-fixed bg-no-repeat bg-position-[bottom,center]"
-        style={{ backgroundSize: "auto 87%" }} // 스타벅스표 코드. 전체 height=800px, 헤더=120px, 이미지가 87%일 경우 뷰포트(내 노트북 기준 945px)를 기준으로=822.15px을 차지한다. background-size에 따라, 120.85px이 본래 빈 배경이 되어야하지만, 헤더가 120px만큼 가려주고, 0.85px은 렌더링 과정에서 반올림되거나 눈에 띄지 않게 된다.
-        // 이는 해당 고찰 근거. W3C 문서에 기록되어 있다.
-        // If background images are specified, this property specifies whether they are fixed with regard to the viewport (fixed) or scroll along with the box (scroll) or its contents (local). The property’s value is given as a comma-separated list of <attachment> keywords where
-        // <attachment> = scroll | fixed | local
-      >
-        <div className="mx-auto flex items-center justify-end max-w-360 h-full">
-          <div className="flex flex-col justify-center items-end">
-            <div className="relative w-[257px] aspect-257/202">
-              <div className="absolute w-full top-0 left-[4vw]">
-                <Image
-                  src={"/2025_january_pick_txt01.png"}
-                  alt="2025_january_pick_txt01"
-                  width={257}
-                  height={202}
-                ></Image>
-              </div>
-            </div>
-            <div className="relative w-[363px] aspect-363/153 mt-15">
-              <div className="absolute w-full top-0 left-[4vw]">
-                <Image
-                  src={"/2025_january_pick_txt02.png"}
-                  alt="2025_january_pick_txt02"
-                  width={363}
-                  height={153}
-                ></Image>
-              </div>
-            </div>
-            <div className="relative mt-10 h-9 w-35">
-              <button
-                className={clsx(
-                  "hover:underline border-2 border-white rounded-md px-4 py-1 text-white w-35 h-9 cursor-pointer hover:bg-white hover:text-black transition-colors duration-500 ease-in-out",
-                  "absolute top-0 left-[3vw]",
-                )}
-              >
-                자세히 보기
-              </button>
-            </div>
-          </div>
-          <div className="relative w-[953px] aspect-953/615">
-            <div className="absolute top-0 left-[6vw] w-full">
-              <Image
-                src={"/2026_christmasPh1_pick_img_261015.png"}
-                alt="2026_christmasPh1_pick_img_261015.png"
-                width={953}
-                height={615}
-              ></Image>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section className="h-1000"></section>
+      <CardSection />
+      <AutumnSection />
+      <StoreFindSection />
     </>
   );
 };
@@ -414,19 +365,12 @@ const EventSection = () => {
 };
 
 const ChristmasBlendSection = () => {
-  const scroll = useScroll();
-  const target = useRef<HTMLDivElement>(null);
+  const { targetRef, isAnimateTarget } = useScrollCheck();
 
-  const [isTargetAnimate, setIsTargetAnimate] = useState(false);
-  useMotionValueEvent(scroll.scrollY, "change", (v) => {
-    setIsTargetAnimate(
-      v + window.innerHeight >= (target.current?.offsetTop ?? 0),
-    );
-  });
   return (
     <section
       className="bg-[url(/2026_christmasPh1_promotion_bg_261015.jpg)] bg-cover bg-no-repeat bg-center py-4 h-140 overflow-hidden"
-      ref={target}
+      ref={targetRef}
     >
       <div className="flex w-full mx-auto max-w-220">
         <div className="w-full">
@@ -435,12 +379,12 @@ const ChristmasBlendSection = () => {
               className="absolute top-1/7 w-full h-full"
               initial={{ opacity: 0, left: "-100vw" }}
               animate={
-                isTargetAnimate
+                isAnimateTarget
                   ? { opacity: 1, left: "3rem" }
                   : { opacity: 0, left: "-100vw" }
               }
               transition={{
-                duration: isTargetAnimate ? 1.5 : 5,
+                duration: isAnimateTarget ? 1.5 : 5,
                 ease: "easeOut",
               }}
             >
@@ -457,12 +401,12 @@ const ChristmasBlendSection = () => {
             className="absolute w-full h-full"
             initial={{ opacity: 0, left: "100vw" }}
             animate={
-              isTargetAnimate
+              isAnimateTarget
                 ? { opacity: 1, left: "-6rem" }
                 : { opacity: 0, left: "100vw" }
             }
             transition={{
-              duration: isTargetAnimate ? 1.7 : 5,
+              duration: isAnimateTarget ? 1.7 : 5,
               ease: "easeOut",
             }}
           >
@@ -489,8 +433,12 @@ const ChristmasBlendSection = () => {
 };
 
 const ChristmasBoxSection = () => {
+  const { targetRef, isAnimateTarget } = useScrollCheck();
   return (
-    <section className="bg-[url(/261021_pc_reserve_bg.jpg)] overflow-hidden">
+    <section
+      className="bg-[url(/261021_pc_reserve_bg.jpg)] overflow-hidden"
+      ref={targetRef}
+    >
       <div className="flex relative mx-auto w-full max-w-270 h-100">
         <div className="absolute top-0 left-0 mt-20 ml-10 w-full max-w-[539px] z-1">
           <div className="relative w-full aspect-539/160">
@@ -512,13 +460,275 @@ const ChristmasBoxSection = () => {
           </div>
         </div>
         <div className="absolute top-0 right-0 w-full h-full">
-          <div className="absolute top-0 right-[-450px] w-[2000px] aspect-[5]">
+          <motion.div
+            className="absolute top-0 right-[-450px] w-[2000px] aspect-[5]"
+            initial={{ opacity: "0%" }}
+            animate={isAnimateTarget && { opacity: "100%" }}
+            transition={{
+              ease: "linear",
+              duration: 1.7,
+            }}
+          >
             <Image
               src={"/261021_pc_reserve_coffee.png"}
               alt="261021_pc_reserve_coffee.png"
               fill
             ></Image>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const CardSection = () => {
+  const { targetRef, isAnimateTarget } = useScrollCheck();
+
+  return (
+    <section
+      className="relative bg-[url(/2026_christmasPh1_pick_bg_261015.jpg)] h-[800px] bg-fixed bg-no-repeat bg-position-[bottom,center] overflow-hidden"
+      style={{ backgroundSize: "auto 87%" }} // 스타벅스표 코드. 전체 height=800px, 헤더=120px, 이미지가 87%일 경우 뷰포트(내 노트북 기준 945px)를 기준으로=822.15px을 차지한다. background-size에 따라, 120.85px이 본래 빈 배경이 되어야하지만, 헤더가 120px만큼 가려주고, 0.85px은 렌더링 과정에서 반올림되거나 눈에 띄지 않게 된다.
+      // 이는 해당 고찰 근거. W3C 문서에 기록되어 있다.
+      // If background images are specified, this property specifies whether they are fixed with regard to the viewport (fixed) or scroll along with the box (scroll) or its contents (local). The property’s value is given as a comma-separated list of <attachment> keywords where
+      // <attachment> = scroll | fixed | local
+      ref={targetRef}
+    >
+      <div className="mx-auto flex items-center justify-end max-w-360 h-full">
+        <div className="flex flex-col justify-center items-end">
+          <div className="relative w-[257px] aspect-257/202">
+            <motion.div
+              className="absolute w-full top-0"
+              initial={{ left: "-50vw", opacity: 0 }}
+              animate={
+                isAnimateTarget
+                  ? { left: "4vw", opacity: "100%" }
+                  : { left: "-50vw", opacity: 0 }
+              }
+              transition={
+                isAnimateTarget
+                  ? { duration: 1.8, ease: "circOut" }
+                  : { duration: 4 }
+              }
+            >
+              <Image
+                src={"/2025_january_pick_txt01.png"}
+                alt="2025_january_pick_txt01"
+                width={257}
+                height={202}
+              ></Image>
+            </motion.div>
           </div>
+          <div className="relative w-[363px] aspect-363/153 mt-15">
+            <motion.div
+              className="absolute w-full top-0"
+              initial={{ left: "-50vw", opacity: 0 }}
+              animate={
+                isAnimateTarget
+                  ? { left: "4vw", opacity: "100%" }
+                  : { left: "-50vw", opacity: 0 }
+              }
+              transition={
+                isAnimateTarget
+                  ? { duration: 2, ease: "circOut" }
+                  : { duration: 4 }
+              }
+            >
+              <Image
+                src={"/2025_january_pick_txt02.png"}
+                alt="2025_january_pick_txt02"
+                width={363}
+                height={153}
+              ></Image>
+            </motion.div>
+          </div>
+          <div className="relative mt-10 h-9 w-35">
+            <motion.button
+              className={clsx(
+                "hover:underline border-2 border-white rounded-md px-4 py-1 text-white w-35 h-9 cursor-pointer hover:bg-white hover:text-black transition-colors duration-500 ease-in-out",
+                "absolute top-0 left-[3vw]",
+              )}
+              initial={{ opacity: 0 }}
+              animate={isAnimateTarget ? { opacity: 1 } : { opacity: 0 }}
+              transition={
+                isAnimateTarget
+                  ? { duration: 1.2, ease: "circOut" }
+                  : { duration: 4 }
+              }
+            >
+              자세히 보기
+            </motion.button>
+          </div>
+        </div>
+        <div className="relative w-[953px] aspect-953/615">
+          <div className="absolute top-0 left-[6vw] w-full">
+            <Image
+              src={"/2026_christmasPh1_pick_img_261015.png"}
+              alt="2026_christmasPh1_pick_img_261015.png"
+              width={953}
+              height={615}
+            ></Image>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const AutumnSection = () => {
+  const { targetRef, isAnimateTarget } = useScrollCheck();
+  return (
+    <section
+      className="bg-[url(/reserve_bg_pc.png)] bg-position-[bottom,center] bg-cover bg-no-repeat"
+      style={{ backgroundSize: "auto 353px" }}
+      ref={targetRef}
+    >
+      <div className="max-w-250 h-[400px] flex mx-auto justify-end">
+        <div className="relative flex flex-col justify-center items-center h-full">
+          <div className="relative w-[588px] aspect-588/96">
+            <div className="absolute w-full h-full top-0 left-4">
+              <Image
+                src={"/reserve_text_pc.png"}
+                alt="reserve_text_pc.png"
+                fill
+              ></Image>
+            </div>
+          </div>
+          <button
+            className={clsx(
+              "hover:underline border-2 border-black rounded-md py-1 text-black w-30 cursor-pointer hover:bg-black hover:text-white transition-colors duration-500",
+              "absolute bottom-20 left-[50%] translate-x-[-3.2rem]",
+            )}
+          >
+            자세히 보기
+          </button>
+        </div>
+        <motion.div
+          initial={{ opacity: "0%" }}
+          animate={isAnimateTarget && { opacity: "100%" }}
+          transition={{
+            ease: "linear",
+            duration: 1.7,
+          }}
+        >
+          <Image
+            src={"/reserve_visual_pc.png"}
+            alt="reserve_visual_pc.png"
+            width={348}
+            height={378}
+          ></Image>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+const StoreFindSection = () => {
+  const { targetRef, isAnimateTarget } = useScrollCheck();
+  return (
+    <section
+      className="relative bg-[url(/store_bg.jpg)] overflow-hidden"
+      ref={targetRef}
+    >
+      <Image
+        className="absolute top-[-61px] left-[50%] translate-x-[-171px]"
+        src={"/store_exp_img03.png"}
+        alt="store_exp_img03.png"
+        width={343}
+        height={132}
+      ></Image>
+      <div className="relative flex justify-between max-w-230 h-[400px] mx-auto mb-10">
+        <Image
+          className="absolute bottom-[-2.5rem] left-[100%] translate-x-[-105px]"
+          src={"/store_exp_img04.png"}
+          alt="store_exp_img04.png"
+          width={230}
+          height={102}
+        ></Image>
+        <motion.div
+          className="relative"
+          initial={{ opacity: "0%" }}
+          animate={isAnimateTarget && { opacity: "100%" }}
+          transition={{
+            ease: "linear",
+            duration: 1.7,
+          }}
+        >
+          <Image
+            src={"/221212_main_story_1.png"}
+            alt="221212_main_story_1.png"
+            width={363}
+            height={310}
+          ></Image>
+          <Image
+            className="absolute top-[50%] left-[50%]"
+            src={"/221212_main_story_2.png"}
+            alt="221212_main_story_2.png"
+            width={225}
+            height={225}
+          ></Image>
+        </motion.div>
+        <div className="relative flex flex-col justify-center h-full">
+          <div className="relative w-[374px] aspect-374/55 mb-4">
+            <motion.div
+              className="absolute top-0 w-full h-full"
+              initial={{ left: "50vw", opacity: "20%" }}
+              animate={
+                isAnimateTarget
+                  ? { left: 0, opacity: "100%" }
+                  : { left: "50%", opacity: "20%" }
+              }
+              transition={{
+                ease: "circOut",
+                duration: isAnimateTarget ? 1.7 : 5,
+              }}
+            >
+              <Image
+                src={"/221212_pc_main_story_txt_1.png"}
+                alt="221212_pc_main_story_txt_1.png"
+                fill
+              ></Image>
+            </motion.div>
+          </div>
+          <div className="relative w-[374px] aspect-374/91">
+            <motion.div
+              className="absolute top-0 w-full h-full"
+              initial={{ left: "50vw", opacity: "20%" }}
+              animate={
+                isAnimateTarget
+                  ? { left: 0, opacity: "100%" }
+                  : { left: "50vw", opacity: "20%" }
+              }
+              transition={{
+                ease: "circOut",
+                duration: isAnimateTarget ? 2.5 : 5,
+              }}
+            >
+              <Image
+                src={"/221212_pc_main_story_txt_2.png"}
+                alt="221212_pc_main_story_txt_2.png"
+                width={374}
+                height={91}
+              ></Image>
+            </motion.div>
+          </div>
+          <motion.button
+            className={clsx(
+              "hover:underline border-2 border-black rounded-sm py-1 text-black w-27 cursor-pointer hover:bg-black hover:text-white transition-colors duration-500",
+              "absolute bottom-15 left-0",
+            )}
+            initial={{ left: "50vw", opacity: "20%" }}
+            animate={
+              isAnimateTarget
+                ? { left: 0, opacity: "100%" }
+                : { left: "50vw", opacity: "20%" }
+            }
+            transition={{
+              ease: "circOut",
+              duration: isAnimateTarget ? 3 : 5,
+            }}
+          >
+            매장 찾기
+          </motion.button>
         </div>
       </div>
     </section>
