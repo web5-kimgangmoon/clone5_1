@@ -126,7 +126,7 @@ const NoticeSection = () => {
 
   useEffect(() => {
     if (!emblaApiX) return;
-    const onSelect = () => setActiveNum(emblaApiX.selectedScrollSnap);
+    const onSelect = () => setActiveNum(emblaApiX.selectedScrollSnap());
     const onAutoPlay = () => setIsAutoplay(true);
     const offAutoPlay = () => setIsAutoplay(false);
 
