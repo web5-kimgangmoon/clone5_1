@@ -110,3 +110,7 @@ next, framer-motion, embla Carousel, react, tailwind, github, @heroicons/react, 
 ### 11/6
 
 1. footer 시작. 하루 가족여행 다녀왔습니다.
+
+### 11/7
+
+1. footer 작성중.
