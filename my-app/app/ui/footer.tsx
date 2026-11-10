@@ -97,15 +97,22 @@ export default () => {
         </nav>
       </section>
       <section className="">
-        <nav className="max-w-290 h-40 mx-auto">
+        <nav className="max-w-290 h-40 mx-auto py-6 ">
           <ul className="flex text-xs text-gray-300">
             {footerLinks.map((v, idx) => {
               return (
-                <li key={idx}>
+                <li
+                  className={clsx(
+                    "relative",
+                    "after:content-[''] after:absolute after:top-0 after:right-0 after:border-r after:border-white",
+                  )}
+                  key={idx}
+                >
                   <Link
                     href={"/"}
                     className={clsx(
-                      (idx === 0 || idx === 3) && "text-green-400 font-bold",
+                      (idx === 0 || idx === 3) &&
+                        "text-green-400 font-bold px-3",
                     )}
                   >
                     {v}

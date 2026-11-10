@@ -118,3 +118,7 @@ next, framer-motion, embla Carousel, react, tailwind, github, @heroicons/react, 
 ### 11/9
 
 1. footer 작성중.
+
+### 11/10
+
+1. footer 작성중.
