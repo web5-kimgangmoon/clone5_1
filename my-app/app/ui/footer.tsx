@@ -112,7 +112,7 @@ export default () => {
                     href={"/"}
                     className={clsx(
                       (idx === 0 || idx === 3) && "text-green-400 font-bold",
-                      "px-2",
+                      "px-2 hover:underline",
                       idx === footerLinks.length - 1 && "pr-0",
                     )}
                   >
