@@ -96,23 +96,24 @@ export default () => {
           </ul>
         </nav>
       </section>
-      <section className="">
-        <nav className="max-w-290 h-40 mx-auto py-6 ">
-          <ul className="flex text-xs text-gray-300">
+      <section className="pb-10">
+        <nav className="max-w-290 h-40 mx-auto py-6">
+          <ul className="flex justify-center text-xs text-gray-300">
             {footerLinks.map((v, idx) => {
               return (
                 <li
                   className={clsx(
                     "relative",
-                    "after:content-[''] after:absolute after:top-0 after:right-0 after:border-r after:border-white",
+                    "after:content-[''] after:absolute after:top-0 after:right-0 after:border-r after:border-gray-700 after:h-full last:after:content-none",
                   )}
                   key={idx}
                 >
                   <Link
                     href={"/"}
                     className={clsx(
-                      (idx === 0 || idx === 3) &&
-                        "text-green-400 font-bold px-3",
+                      (idx === 0 || idx === 3) && "text-green-400 font-bold",
+                      "px-2",
+                      idx === footerLinks.length - 1 && "pr-0",
                     )}
                   >
                     {v}
@@ -121,6 +122,31 @@ export default () => {
               );
             })}
           </ul>
+          <ul className="flex justify-center gap-2 pt-4">
+            {["찾아오시는 길", "신규입점제의", "사이트 맵"].map((v, idx) => (
+              <li className="text-white" key={idx}>
+                <Link
+                  className="inline-block w-30 text-center text-xs border-2 border-white px-4 py-2 rounded-xs hover:underline"
+                  href={"/"}
+                >
+                  {v}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <ul className="flex justify-center gap-4 pt-6 text-xs text-gray-400">
+            {[
+              "사업자등록번호 : 201-81-21515",
+              "주식회사 에스씨케이컴퍼니 대표이사 : 신동우",
+              "TEL : 1522-3232",
+              "개인정보 보호책임자 : 이찬우",
+            ].map((v, idx) => (
+              <li key={idx}>{v}</li>
+            ))}
+          </ul>
+          <small className="flex justify-center text-xs text-center text-gray-400 pt-4">
+            ⓒ 2026 Starbucks Coffee Company. All Rights Reserved.
+          </small>
         </nav>
       </section>
     </footer>
